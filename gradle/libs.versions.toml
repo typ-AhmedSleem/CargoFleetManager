@@ -12,11 +12,16 @@ androidx-lifecycle = "2.8.4"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
+gdxControllersDesktop = "2.2.3"
+gdxControllersIos = "2.2.3"
 junit = "4.13.2"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.10.1"
 
 [libraries]
+gdx-controllers-android = { module = "com.badlogicgames.gdx-controllers:gdx-controllers-android", version.ref = "gdxControllersDesktop" }
+gdx-controllers-ios = { module = "com.badlogicgames.gdx-controllers:gdx-controllers-ios", version.ref = "gdxControllersIos" }
+gdx-controllers-desktop = { module = "com.badlogicgames.gdx-controllers:gdx-controllers-desktop", version.ref = "gdxControllersDesktop" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
