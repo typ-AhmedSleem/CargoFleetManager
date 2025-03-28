@@ -61,7 +61,7 @@ cupertino-icons-extended = { module = "io.github.alexzhirkevich:cupertino-icons-
 androidx-core-core = { group = "androidx.core", name = "core", version.ref = "androidx-core" }
 androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "androidx-browser" }
 androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
-kotlinx_datetime_ext = { module = "com.raedghazal:kotlinx_datetime_ext", version.ref = "kotlinx_datetime_ext" }
+kotlinxDatetimeExt = { module = "com.raedghazal:kotlinx_datetime_ext", version.ref = "kotlinx_datetime_ext" }
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
 multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettingsNoArg" }
 moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissionsCompose" }
