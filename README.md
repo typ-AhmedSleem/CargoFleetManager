@@ -1,78 +1,24 @@
-# Cargo FleetManager
+The Wireless Control Unit (WCU) is a software component of the Cargo AMR system, designed to serve as the control dashboard for the robot.
+It runs on a separate PC and provides an interface for operators to control and monitor the robot’s functions wirelessly through a local network.
+The WCU is equipped with several key features and modules that enable seamless interaction with the Cargo AMR system.
 
-🚀 **Cargo FleetManager** is a **Kotlin Multiplatform** application designed for controlling and monitoring Autonomous Mobile Robots (AMRs). The software provides a comprehensive **desktop dashboard (Windows & macOS)** and a minimal **mobile version (Android & iOS)** for real-time fleet monitoring.
+**Key Features:**
+- Wireless communication with the Cargo AMR software via socket channels.
+- Real-time monitoring and control of the robot's movement and robotic arm.
+- Data logging and report generation for operational tracking and analysis.
+- Intuitive graphical user interface (GUI) for ease of use by operators.
 
-## 🌟 Features
+**Modules:**
+1. **Communication Module:** Manages socket connections for data exchange, encoding, and decoding between the WCU and Cargo AMR.
+2. **GUI Module:** Provides a user-friendly interface that displays real-time data, robot status, and control options.
+3. **Data Logging and Reporting Module:** Logs operational data, tracks history, and supports generating reports for analysis.
+4. **Car Control Module:** Allows manual driving and speed adjustment, as well as switching between control modes.
+5. **Arm Control Module:** Controls the robotic arm, including joint movement and inverse kinematics calculations.
+6. **Realtime Monitoring Module:** Receives and displays real-time sensor data and video streams from the robot.
+7. **Path Planning Module:** Supports autonomous navigation (yet to be implemented).
 
-- **Real-time AMR Monitoring**
-    - Live data visualization from AMRs.
-    - Real-time camera streaming from AMRs.
-    - Sensor data updates.
+**Platforms:**
+The WCU software is built for PC platforms, running on Windows and Linux environments, and interfaces with the Cargo AMR over a local network.
+The system’s modular design allows for flexibility and future enhancements as required by the project.
 
-- **Control & Management**
-    - Manual driving mode for AMRs.
-    - Arm control with inverse/forward kinematics.
-    - Speed control & mode switching.
-
-- **Reporting & Logging**
-    - Logs operational data for analysis.
-    - Generates reports from historical data.
-
-- **Communication System**
-    - Uses WebSocket & TCP sockets for AMR communication.
-    - Efficient data serialization and transmission.
-
-## 🛠️ Tech Stack
-
-- **Kotlin Multiplatform** (KMP) for shared business logic.
-- **Compose Multiplatform** for UI (Desktop & Mobile).
-- **Python** for AMR-side integration & video streaming.
-- **Sockets/WebSockets** for real-time communication.
-- **Serialization** (JSON, CBOR) for efficient data transfer.
-
-## 📌 Modules Overview
-
-### 1. Communication Module
-Handles socket connections for sending and receiving data between AMRs and the WCU.
-
-### 2. GUI Module
-The front-end layer for interacting with users, displaying AMR data, and executing commands.
-
-### 3. Data Logging & Reporting Module
-Stores operational data and enables historical reporting.
-
-### 4. Car Control Module
-Provides functions for AMR navigation, speed control, and manual driving.
-
-### 5. Arm Control Module
-Includes joint control, inverse kinematics, and forward kinematics for robotic arms.
-
-### 6. Realtime Monitoring Module
-Manages real-time sensor data and video streaming from AMRs.
-
-## 📦 Setup & Installation
-
-### Prerequisites
-- **JDK 17+**
-- **Kotlin 2.0+**
-- **Gradle** (latest recommended)
-- **Python 3.9+** (for AMR-side components)
-
-### Steps
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/typ-ahmedsleem/CargoFleetManager.git
-   cd CargoFleetManager
-   ```
-2. Sync and build the project:
-   ```sh
-   ./gradlew build
-   ```
-3. Run the desktop version:
-   ```sh
-   ./gradlew :desktop:run
-   ```
-4. Run the android version:
-   ```sh
-   ./gradlew :android:installDebug
-   ```
+The WCU’s primary goal is to provide a reliable and responsive control system, ensuring that operators can effectively manage the Cargo AMR’s movements and tasks in real-time.
