@@ -58,6 +58,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("com.badlogicgames.gdx-controllers:gdx-controllers-android:2.2.3")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -69,9 +70,13 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
         }
+        iosMain.dependencies {
+            implementation("com.badlogicgames.gdx-controllers:gdx-controllers-ios:2.2.3")
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation("com.badlogicgames.gdx-controllers:gdx-controllers-desktop:2.2.3")
         }
     }
 }
