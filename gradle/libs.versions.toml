@@ -27,7 +27,7 @@ moko-permissionsCompose = "0.18.0"
 kotlinxDatetime = "0.6.1"
 kotlinxSerialization = "1.7.3"
 kotlinxCoroutines = "1.10.1"
-ktor = "2.3.12"
+ktor = "3.1.1"
 voyagerNavigator = "1.1.0-beta02"
 sqlDelight = "2.0.2"
 kmputils = "1.4.2"
@@ -67,10 +67,13 @@ multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings
 moko-permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko-permissionsCompose" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
-kotlinx-ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-kotlinx-ktor-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 voyager-bottom-sheet-navigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyagerNavigator" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerNavigator" }
