@@ -18,10 +18,10 @@ class DashboardViewModel(
     val dashboardData: State<DashboardData?> = _dashboardData
 
     init {
-        loadDashboardData()
+        observeRobotInfo()
     }
 
-    private fun loadDashboardData() {
+    private fun observeRobotInfo() {
         viewModelScope.launch {
             while (isActive) {
                 _dashboardData.value = repository.getDashboardData()
