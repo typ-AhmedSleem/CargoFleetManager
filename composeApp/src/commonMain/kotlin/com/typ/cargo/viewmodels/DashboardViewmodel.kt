@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.typ.cargo.data.models.DashboardData
 import com.typ.cargo.data.repositories.abstractions.DashboardRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
@@ -21,7 +23,10 @@ class DashboardViewModel(
 
     private fun loadDashboardData() {
         viewModelScope.launch {
-            _dashboardData.value = repository.getDashboardData()
+            while (isActive) {
+                _dashboardData.value = repository.getDashboardData()
+                delay(5000L)
+            }
         }
     }
 }
