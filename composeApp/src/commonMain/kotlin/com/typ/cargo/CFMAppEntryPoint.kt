@@ -6,11 +6,18 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.typ.cargo.di.initKoin
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
 fun CFMAppEntryPoint() {
+    initKoin()
+    CFMAppContent()
+}
+
+@Composable
+private fun CFMAppContent() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
