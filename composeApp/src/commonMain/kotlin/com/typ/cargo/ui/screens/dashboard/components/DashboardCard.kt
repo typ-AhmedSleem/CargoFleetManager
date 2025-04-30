@@ -32,11 +32,13 @@ internal fun DashboardCard(
     modifier: Modifier = Modifier.fillMaxWidth(),
     title: String,
     value: String,
+    strokeColor: Color = CupertinoTheme.colorScheme.secondarySystemBackground,
     valueTextColor: Color = CupertinoTheme.colorScheme.label
 ) {
     DashboardCard(
-        modifier = modifier,
         title = title,
+        modifier = modifier,
+        strokeColor= strokeColor,
         value = AnnotatedString(value),
         valueTextColor = valueTextColor
     )
@@ -44,16 +46,17 @@ internal fun DashboardCard(
 
 @Composable
 internal fun DashboardCard(
-    modifier: Modifier = Modifier.fillMaxWidth(),
     title: String,
     value: AnnotatedString,
-    valueTextColor: Color = CupertinoTheme.colorScheme.label
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    valueTextColor: Color = CupertinoTheme.colorScheme.label,
+    strokeColor: Color = CupertinoTheme.colorScheme.secondarySystemBackground,
 ) {
     Box(
         modifier = modifier
             .border(
-                2.dp,
-                CupertinoTheme.colorScheme.secondarySystemBackground,
+                width= (2.5f).dp,
+                color = strokeColor,
                 shape = RoundedCornerShape(16.dp)
             )
             .clip(RoundedCornerShape(16.dp))
