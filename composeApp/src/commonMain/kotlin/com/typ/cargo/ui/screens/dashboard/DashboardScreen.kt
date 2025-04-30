@@ -34,9 +34,9 @@ object DashboardScreen : Screen, KoinComponent {
                 vertical = 16.dp,
                 horizontal = 16.dp
             )) {
-            DashboardLeftPanel(robotInfo, 0.65f)
+            DashboardLeftPanel(robotInfo, 0.75f)
             DashboardCenterPanel(robotInfo, 1f)
-            DashboardRightPanel(0.65f)
+            DashboardRightPanel(0.5f)
         }
     }
 }
