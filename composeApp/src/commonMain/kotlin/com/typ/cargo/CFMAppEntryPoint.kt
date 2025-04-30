@@ -10,7 +10,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.typ.cargo.di.initKoin
-import com.typ.cargo.ui.screens.DashboardScreen
+import com.typ.cargo.ui.screens.dashboard.DashboardScreen
 import com.typ.cargo.ui.theming.CFMTheme
 import io.github.alexzhirkevich.cupertino.CupertinoScaffold
 import io.github.alexzhirkevich.cupertino.ExperimentalCupertinoApi
