@@ -12,7 +12,7 @@ class MockDashboardRepository : DashboardRepository {
             batteryPercentage = Random.nextInt(0, 100),
             leftMotorSpeed = Random.nextInt(-100, 100),
             rightMotorSpeed = Random.nextInt(-100, 100),
-            driversTemperature = Random.nextInt(0, 50),
+            driversTemperature = Random.nextInt(28, 50),
             drivingMode = DrivingMode.entries.random(),
             robotHeading = Random.nextInt(0, 359),
             errorLogs = null
