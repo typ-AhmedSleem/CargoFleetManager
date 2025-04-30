@@ -15,10 +15,6 @@ internal fun MotorSpeedCard(
     DashboardCard(
         title = title,
         modifier = modifier,
-        valueTextColor = when {
-            motorSpeed == 0 -> CupertinoTheme.colorScheme.label
-            else -> CupertinoTheme.colorScheme.accent
-        },
         value = UiSpeedConverter.convert(motorSpeed)
     )
 }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,21 @@ internal fun DashboardCard(
     modifier: Modifier = Modifier.fillMaxWidth(),
     title: String,
     value: String,
+    valueTextColor: Color = CupertinoTheme.colorScheme.label
+) {
+    DashboardCard(
+        modifier = modifier,
+        title = title,
+        value = AnnotatedString(value),
+        valueTextColor = valueTextColor
+    )
+}
+
+@Composable
+internal fun DashboardCard(
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    title: String,
+    value: AnnotatedString,
     valueTextColor: Color = CupertinoTheme.colorScheme.label
 ) {
     Box(

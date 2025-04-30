@@ -14,12 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import com.typ.cargo.ui.converters.UiAngleConverter
-import com.typ.cargo.ui.converters.UiBoardTemperatureConverter
 import com.typ.cargo.ui.converters.UiDrivingModeConverter
 import com.typ.cargo.ui.screens.dashboard.components.BatteryDetailsCard
 import com.typ.cargo.ui.screens.dashboard.components.DashboardCard
+import com.typ.cargo.ui.screens.dashboard.components.DriversTemperatureCard
 import com.typ.cargo.ui.screens.dashboard.components.MotorSpeedCard
+import com.typ.cargo.ui.screens.dashboard.components.RobotHeadingCard
 import com.typ.cargo.ui.theming.Colors
 import com.typ.cargo.viewmodels.DashboardViewModel
 import io.github.alexzhirkevich.cupertino.CupertinoText
@@ -69,10 +69,7 @@ object DashboardScreen : Screen, KoinComponent {
                     )
                 }
 
-                DashboardCard(
-                    title = "Drivers Temperature",
-                    value = UiBoardTemperatureConverter.convert(it.driversTemperature)
-                )
+                DriversTemperatureCard(temperature = it.driversTemperature)
 
                 DashboardCard(
                     title = "Driving Mode",
@@ -80,15 +77,12 @@ object DashboardScreen : Screen, KoinComponent {
                     value = UiDrivingModeConverter.convert(it.drivingMode)
                 )
 
-                DashboardCard(
-                    title = "Heading",
-                    value = "${UiAngleConverter.convert(it.robotHeading)}\nfrom North"
-                )
+                RobotHeadingCard(robotHeading = it.robotHeading)
 
                 DashboardCard(
                     title = "Errors",
                     valueTextColor = when {
-                        it.errorLogs.isNullOrEmpty() -> Colors.success
+                        it.errorLogs.isNullOrEmpty() -> CupertinoTheme.colorScheme.label
                         else -> Colors.error
                     },
                     value = it.errorLogs ?: "No errors have been reported yet"
