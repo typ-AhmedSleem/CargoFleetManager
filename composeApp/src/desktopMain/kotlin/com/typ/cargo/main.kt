@@ -12,9 +12,9 @@ fun main() = singleWindowApplication(
     title = "CargoFleetManager",
     state = WindowState(
         position = Aligned(Alignment.Center),
-        placement = WindowPlacement.Maximized,
-        width = 1280.dp,
-        height = 720.dp
+        placement = WindowPlacement.Fullscreen,
+        width = 1920.dp,
+        height = 1080.dp
     )
 ) {
     CFMAppEntryPoint()
