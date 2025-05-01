@@ -10,6 +10,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.typ.cargo.di.initKoin
+import com.typ.cargo.ui.screens.LauncherScreen
 import com.typ.cargo.ui.screens.dashboard.DashboardScreen
 import com.typ.cargo.ui.theming.CFMTheme
 import io.github.alexzhirkevich.cupertino.CupertinoScaffold
@@ -33,7 +34,7 @@ private fun CFMAppContent() {
         CupertinoScaffold(
             modifier = Modifier.fillMaxSize(),
         ) { rootPaddings: PaddingValues ->
-            Navigator(DashboardScreen) { nav ->
+            Navigator(LauncherScreen) { nav ->
                 SlideTransition(
                     nav,
                     modifier = Modifier.padding(rootPaddings)
