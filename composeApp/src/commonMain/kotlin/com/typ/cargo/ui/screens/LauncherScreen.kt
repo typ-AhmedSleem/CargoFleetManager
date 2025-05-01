@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import com.typ.cargo.ui.screens.account.LoginScreen
 import com.typ.cargo.ui.screens.dashboard.DashboardScreen
 import io.github.alexzhirkevich.cupertino.CupertinoButton
 import io.github.alexzhirkevich.cupertino.CupertinoIcon
@@ -109,7 +110,7 @@ object LauncherScreen : Screen {
             AnimatedVisibility(setupDone) {
                 CupertinoButton(
                     onClick = {
-                        navigator?.replace(DashboardScreen)
+                        navigator?.replace(LoginScreen)
                     },
                     modifier = Modifier
                         .widthIn(min = 300.dp)
