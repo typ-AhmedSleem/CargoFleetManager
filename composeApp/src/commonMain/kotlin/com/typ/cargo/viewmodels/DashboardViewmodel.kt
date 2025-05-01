@@ -14,8 +14,8 @@ class DashboardViewModel(
     private val repository: DashboardRepository
 ) : ViewModel() {
 
-    private val _dashboardData = mutableStateOf<DashboardData?>(null)
-    val dashboardData: State<DashboardData?> = _dashboardData
+    private val _robotInfo = mutableStateOf<DashboardData?>(null)
+    val robotInfo: State<DashboardData?> = _robotInfo
 
     init {
         observeRobotInfo()
@@ -24,7 +24,7 @@ class DashboardViewModel(
     private fun observeRobotInfo() {
         viewModelScope.launch {
             while (isActive) {
-                _dashboardData.value = repository.getDashboardData()
+                _robotInfo.value = repository.getDashboardData()
                 delay(5000L)
             }
         }
