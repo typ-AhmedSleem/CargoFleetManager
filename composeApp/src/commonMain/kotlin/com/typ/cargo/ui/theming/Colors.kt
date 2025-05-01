@@ -13,10 +13,16 @@ object Colors {
     val label: Color
         @Composable
         get() = CupertinoTheme.colorScheme.label
+
     val accent: Color
         @Composable
         get() = CupertinoTheme.colorScheme.accent
+
     val secondarySystemBackground: Color
         @Composable
         get() = CupertinoTheme.colorScheme.secondarySystemBackground
+
+    val secondaryLabel: Color
+        @Composable
+        get() = CupertinoTheme.colorScheme.secondaryLabel
 }
