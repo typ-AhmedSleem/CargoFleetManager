@@ -35,6 +35,7 @@ import cargofleetmanager.composeapp.generated.resources.Res
 import cargofleetmanager.composeapp.generated.resources.picAhmedSleem
 import com.typ.cargo.ui.screens.dashboard.DashboardScreen
 import com.typ.cargo.ui.theming.Colors
+import com.typ.cargo.ui.utils.title
 import io.github.alexzhirkevich.cupertino.CupertinoButton
 import io.github.alexzhirkevich.cupertino.CupertinoButtonDefaults
 import io.github.alexzhirkevich.cupertino.CupertinoIcon
@@ -80,10 +81,10 @@ fun CFMTopAppBar(
         Spacer(Modifier.width(8.dp))
         CupertinoText(
             maxLines = 1,
-            text = "Cargo Fleet Manager",
             fontWeight = FontWeight.Bold,
             modifier = Modifier.weight(1f),
             style = CupertinoTheme.typography.title2,
+            text = currentScreen?.title ?: "Cargo Fleet Manager",
         )
 
         Spacer(Modifier.width(16.dp))
@@ -158,11 +159,11 @@ private fun ConnectionIndicatorButton(
             .widthIn(min = 156.dp),
         shape = RoundedCornerShape(50),
         colors = CupertinoButtonDefaults.filledButtonColors(
-            containerColor = Colors.success,
+            containerColor = Colors.error,
             contentColor = Color.White
         )
     ) {
-        CupertinoText("Connected")
+        CupertinoText("Not Connected")
     }
 }
 
