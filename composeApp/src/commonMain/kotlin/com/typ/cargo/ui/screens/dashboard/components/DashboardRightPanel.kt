@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.typ.cargo.ui.theming.Colors
 import io.github.alexzhirkevich.cupertino.icons.CupertinoIcons
 import io.github.alexzhirkevich.cupertino.icons.outlined.Battery100
 import io.github.alexzhirkevich.cupertino.icons.outlined.Car
@@ -89,6 +90,17 @@ internal fun RowScope.DashboardRightPanel(
             title = "Begin arm control",
             modifier = Modifier.fillMaxWidth(),
             icon = CupertinoIcons.Default.HandRaised,
+        )
+
+        DashboardCard(
+            title = "Connection Status",
+            valueTextColor = Colors.error,
+            value = "Not connected to Cargo AMR yet!"
+        )
+
+        DashboardCard(
+            title = "Connection Quality",
+            value = "Connection Quality indicator will be displayed here"
         )
     }
 }

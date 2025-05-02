@@ -59,17 +59,6 @@ internal fun RowScope.DashboardCenterPanel(
         )
 
         DashboardCard(
-            title = "Connection Status",
-            valueTextColor = Colors.error,
-            value = "Not connected to Cargo AMR yet!"
-        )
-
-        DashboardCard(
-            title = "Connection Quality",
-            value = "Connection Quality indicator will be displayed here"
-        )
-
-        DashboardCard(
             title = "Mission Details",
             value = "Mission details will be displayed here"
         )
