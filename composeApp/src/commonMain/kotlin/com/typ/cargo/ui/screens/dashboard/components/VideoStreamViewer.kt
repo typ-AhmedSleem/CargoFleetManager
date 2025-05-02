@@ -64,7 +64,7 @@ internal fun VideoStreamViewer(
                 .blur((if (showingBlur) 15 else 0).dp),
             contentDescription = null,
             bitmap = lastSuccessfulFrame,
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
         )
 
         when (videoFrame) {
