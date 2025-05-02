@@ -21,20 +21,21 @@ object DashboardScreen : Screen, KoinComponent {
     override fun Content() {
         // * Runtime * //
         val viewModel: DashboardViewModel = remember { get() }
-        val robotInfo by viewModel.robotInfo
+        val robotInfo by remember { viewModel.robotInfo }
+        val videoStream = remember { viewModel.startWatchingVideoStream() }
 
         // * UI * //
-        ThreeEqualSectionsRow(Modifier
-            .fillMaxSize()
-            .padding(
-                vertical = 16.dp,
-                horizontal = 16.dp
-            )) {
+        ThreeEqualSectionsRow(
+            Modifier
+                .fillMaxSize()
+                .padding(
+                    vertical = 16.dp,
+                    horizontal = 16.dp
+                )
+        ) {
             DashboardLeftPanel(robotInfo, 0.75f)
-            DashboardCenterPanel(robotInfo, 1f)
+            DashboardCenterPanel(videoStream, 1f)
             DashboardRightPanel(0.5f)
         }
     }
 }
-
-

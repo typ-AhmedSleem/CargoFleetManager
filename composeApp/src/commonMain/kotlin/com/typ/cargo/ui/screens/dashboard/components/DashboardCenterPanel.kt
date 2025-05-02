@@ -1,10 +1,8 @@
 package com.typ.cargo.ui.screens.dashboard.components
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,20 +13,25 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.typ.cargo.data.models.DashboardData
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.typ.cargo.data.models.StreamVideoFrame
+import com.typ.cargo.data.models.StreamVideoFrame.*
 import com.typ.cargo.ui.theming.Colors
 import io.github.alexzhirkevich.cupertino.theme.CupertinoTheme
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 internal fun RowScope.DashboardCenterPanel(
-    // todo: Should add the live stream feed here
-    dashboardData: DashboardData?,
+    videoStream: Flow<StreamVideoFrame>,
     weight: Float = 1f
 ) {
+    // * Runtime * //
+    val videoFrame by videoStream.collectAsStateWithLifecycle(NoFrame)
+
+    // * UI * //
     Column(
         modifier = Modifier
             .weight(weight)
@@ -48,45 +51,32 @@ internal fun RowScope.DashboardCenterPanel(
     ) {
         PanelTitleText("Mission Tracker")
 
-        dashboardData?.let {
+        VideoStreamViewer(
+            videoFrame = videoFrame,
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 500.dp),
+        )
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    /*.border(
-                        width = 2.dp,
-                        shape = RoundedCornerShape(16.dp),
-                        color = CupertinoTheme.colorScheme.secondarySystemBackground,
-                    )*/
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(CupertinoTheme.colorScheme.secondarySystemBackground)
-                    .heightIn(min = 500.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                PanelTitleText("Live camera stream will be displayed here")
-            }
+        DashboardCard(
+            title = "Connection Status",
+            valueTextColor = Colors.error,
+            value = "Not connected to Cargo AMR yet!"
+        )
 
-            DashboardCard(
-                title = "Connection Status",
-                valueTextColor = Colors.error,
-                value = "Not connected to Cargo AMR yet!"
-            )
+        DashboardCard(
+            title = "Connection Quality",
+            value = "Connection Quality indicator will be displayed here"
+        )
 
-            DashboardCard(
-                title = "Connection Quality",
-                value = "Connection Quality indicator will be displayed here"
-            )
+        DashboardCard(
+            title = "Mission Details",
+            value = "Mission details will be displayed here"
+        )
 
-            DashboardCard(
-                title = "Mission Details",
-                value = "Mission details will be displayed here"
-            )
-
-            DashboardCard(
-                title = "Load Weight",
-                value = "Load weight will be displayed here"
-            )
-
-        }
+        DashboardCard(
+            title = "Load Weight",
+            value = "Load weight will be displayed here"
+        )
     }
 }
