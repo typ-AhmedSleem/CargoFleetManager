@@ -112,7 +112,7 @@ private fun VideoStreamBufferingIndicator(
             color = Colors.warning
         )
         CupertinoText(
-            text = "Buffering...",
+            text = "Connecting...",
             color = Colors.warning,
             textAlign = TextAlign.Center,
             style = CupertinoTheme.typography.title1
