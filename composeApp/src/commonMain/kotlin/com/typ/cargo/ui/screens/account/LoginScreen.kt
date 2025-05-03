@@ -34,6 +34,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cargofleetmanager.composeapp.generated.resources.Res
 import cargofleetmanager.composeapp.generated.resources.picAhmedSleem
+import com.typ.cargo.data.models.User
+import com.typ.cargo.data.repositories.abstractions.UserRepository
 import com.typ.cargo.ui.screens.dashboard.DashboardScreen
 import com.typ.cargo.ui.theming.Colors
 import io.github.alexzhirkevich.cupertino.CupertinoBorderedTextField
@@ -43,17 +45,21 @@ import io.github.alexzhirkevich.cupertino.ExperimentalCupertinoApi
 import io.github.alexzhirkevich.cupertino.theme.CupertinoTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import pro.respawn.kmmutils.compose.resources.painter
 
 @OptIn(ExperimentalCupertinoApi::class)
-object LoginScreen : Screen {
+object LoginScreen : Screen, KoinComponent {
 
     @Composable
     override fun Content() {
+        val userRepo: UserRepository = remember { get() }
         val navigator = LocalNavigator.current
         val coroutineScope = rememberCoroutineScope()
         val username = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
+        var loggedUser: User? by remember { mutableStateOf(null) }
         var loginStatus by remember { mutableStateOf(LoginState.NOT_LOGIN) }
 
         Column(
@@ -108,7 +114,7 @@ object LoginScreen : Screen {
                             color = Colors.label,
                             textAlign = TextAlign.Center,
                             style = CupertinoTheme.typography.largeTitle,
-                            text = "Ahmed Sleem",
+                            text = loggedUser!!.name,
                         )
 
                         Spacer(Modifier.height(16.dp))
@@ -168,8 +174,18 @@ object LoginScreen : Screen {
                         }
                         coroutineScope.launch cs@{
                             loginStatus = LoginState.LOGGING_IN
-                            delay(5000L)
-                            loginStatus = LoginState.LOGGED_IN
+                            delay(2500L)
+                            userRepo.loginUser(
+                                username = username.value,
+                                password = password.value
+                            ).onSuccess {
+                                loggedUser = it
+                                loginStatus = LoginState.LOGGED_IN
+                            }.onFailure {
+                                // todo: show error to user
+                                it.printStackTrace()
+                                loginStatus = LoginState.NOT_LOGIN
+                            }
                         }
                     } else if (loginStatus == LoginState.LOGGED_IN) {
                         // * Proceed to next screen
@@ -180,7 +196,7 @@ object LoginScreen : Screen {
                 CupertinoText(
                     when (loginStatus) {
                         LoginState.LOGGING_IN -> "Logging you in..."
-                        LoginState.LOGGED_IN -> "Continue to next screen"
+                        LoginState.LOGGED_IN -> "Continue to configuration"
                         else -> "Login to account"
                     }
                 )

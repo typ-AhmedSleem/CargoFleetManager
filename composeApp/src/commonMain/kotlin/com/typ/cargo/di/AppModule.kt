@@ -1,7 +1,9 @@
 package com.typ.cargo.di
 
-import com.typ.cargo.data.mocks.MockDashboardRepository
 import com.typ.cargo.data.repositories.abstractions.DashboardRepository
+import com.typ.cargo.data.repositories.abstractions.UserRepository
+import com.typ.cargo.data.repositories.mocks.MockDashboardRepository
+import com.typ.cargo.data.repositories.mocks.MockUserRepository
 import com.typ.cargo.networking.Endpoints
 import com.typ.cargo.networking.createDefaultHttpClient
 import com.typ.cargo.viewmodels.DashboardViewModel
@@ -25,6 +27,7 @@ val appModule = module {
         )
     }
     single<DashboardRepository> { MockDashboardRepository() }
+    single<UserRepository> { MockUserRepository() }
 }
 
 fun initKoin() {
