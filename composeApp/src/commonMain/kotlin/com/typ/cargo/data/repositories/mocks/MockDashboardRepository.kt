@@ -1,4 +1,4 @@
-package com.typ.cargo.data.mocks
+package com.typ.cargo.data.repositories.mocks
 
 import com.typ.cargo.data.models.DashboardData
 import com.typ.cargo.data.repositories.abstractions.DashboardRepository
