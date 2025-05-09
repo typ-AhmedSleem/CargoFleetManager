@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,6 +29,12 @@ import com.typ.cargo.features.gamepad.ControllerSnapshot.Disconnected
 import com.typ.cargo.features.gamepad.ControllerSnapshot.Snapshot
 import com.typ.cargo.features.gamepad.GamepadController
 import com.typ.cargo.features.gamepad.GamepadViewModel
+import com.typ.cargo.interpolation.LinearInterpolation
+import com.typ.cargo.interpolation.LogarithmicInterpolation
+import com.typ.cargo.interpolation.dampedInterpolation
+import com.typ.cargo.interpolation.hybridInterpolation
+import com.typ.cargo.interpolation.linearInterpolation
+import com.typ.cargo.interpolation.logarithmicInterpolation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 
@@ -46,6 +53,12 @@ object SBGamepadScreen : Screen {
         }
         var powerLevel by remember {
             mutableStateOf(ControllerPowerLevel.POWER_UNKNOWN)
+        }
+        val linInterpolation = remember {
+            LinearInterpolation(1f)
+        }
+        val logInterpolation = remember {
+            LogarithmicInterpolation(0.25f)
         }
 
         LaunchedEffect(Unit) {
@@ -95,6 +108,9 @@ object SBGamepadScreen : Screen {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                var previousRT by remember {
+                    mutableIntStateOf(0)
+                }
                 // * Display the controller state fields within Texts
                 Text("Connected Controllers: ${controllerState?.isConnected ?: false}")
                 Text("Button A: ${controllerState?.a}")
@@ -103,8 +119,18 @@ object SBGamepadScreen : Screen {
                 Text("Button Y: ${controllerState?.y}")
                 Text("Button L1: ${controllerState?.lb}")
                 Text("Button R1: ${controllerState?.rb}")
-                Text("Button L2: ${controllerState?.leftTrigger}")
-                Text("Button R2: ${controllerState?.rightTrigger}")
+                Text("Button L2: ${processJoystickInput(controllerState?.leftTrigger ?: 0f, ::linearInterpolation) * 10}")
+                Text("Button R2 (1): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 1f)}")
+                Text("Button R2 (HYBRID): ${
+                    hybridInterpolation(controllerState?.rightTrigger ?: 0f, previousRT)
+                        .also { previousRT = it }
+                }"
+                )
+                Text("Button R2 (0.6): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 0.6f)}")
+                Text("Button R2 (0.5): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 0.5f)}")
+                Text("Button R2 (0.4): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 0.4f)}")
+                Text("Button R2 (0.3): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 0.3f)}")
+                Text("Button R2 (0.1): ${dampedInterpolation(controllerState?.rightTrigger ?: 0f, 0.1f)}")
                 Text("Button Back: ${controllerState?.back}")
                 Text("Button Start: ${controllerState?.start}")
                 Text("Button Guide: ${controllerState?.guide}")
@@ -112,7 +138,11 @@ object SBGamepadScreen : Screen {
                 Text("DPad Down: ${controllerState?.dpadDownJustPressed}")
                 Text("DPad Left: ${controllerState?.dpadLeftJustPressed}")
                 Text("DPad Right: ${controllerState?.dpadRightJustPressed}")
-                Text("Left Stick X: ${controllerState?.leftStickX}")
+                Text("Left Stick X (Raw): ${controllerState?.leftStickX}")
+                Text("Left Stick X (LinV1): ${linInterpolation.interpolate(0f, controllerState?.leftStickX ?: 0f)}")
+                Text("Left Stick X (LinV2): ${processJoystickInput(controllerState?.leftStickX ?: 0f, ::linearInterpolation) * 10}")
+                Text("Left Stick X (LogV1): ${logInterpolation.interpolate(0f, controllerState?.leftStickX ?: 0f)}")
+                Text("Left Stick X (LogV2): ${processJoystickInput(controllerState?.leftStickX ?: 0f, ::logarithmicInterpolation) * 10}")
                 Text("Left Stick Y: ${controllerState?.leftStickY}")
                 Text("Right Stick X: ${controllerState?.rightStickX}")
                 Text("Right Stick Y: ${controllerState?.rightStickY}")
@@ -181,4 +211,9 @@ object SBGamepadScreen : Screen {
             }
         }
     }
+
+    private fun <O> processJoystickInput(rawInput: Float, interpolation: (Float, Float, Float, Float, Float) -> O): O {
+        return interpolation(rawInput, 0f, 1f, -100.0f, 100.0f)
+    }
+
 }
