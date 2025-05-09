@@ -7,7 +7,7 @@ import com.studiohartman.jamepad.ControllerManager
 import com.studiohartman.jamepad.ControllerState
 import kotlinx.coroutines.delay
 
-class GamepadController : ControllerListener {
+class GamepadManager : ControllerListener {
 
     private var controller: ControllerIndex? = null
         private set(value) {
@@ -21,21 +21,24 @@ class GamepadController : ControllerListener {
             initSDLGamepad()
         }
         .also {
-            if (it.numControllers >= 0) {
+            it.update()
+            if (it.numControllers > 0) {
                 controller = it.getControllerIndex(0)
             }
         }
 
     val controllersCount: Int
-        get() = controllerManager.numControllers
+        get() {
+            controllerManager.update()
+            return controllerManager.numControllers
+        }
 
     val anyControllerConnected: Boolean
-        get() = controllersCount >= 0
+        get() = controllersCount > 0
 
     suspend fun grabControllerState(controllerIndex: Int = 0): ControllerState {
         val state = controllerManager.getState(controllerIndex)
         delay(5L)
-        controllerManager.update()
         return state
     }
 
